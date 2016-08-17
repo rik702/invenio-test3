@@ -17,13 +17,40 @@
         {#<input type="search" name="q" placeholder="Search Sea Creatures" autocomplete="off" class="search-input">#}
     {#</form>#}
 {#</div>#}
-<header class="header" id="Titlebox">
+    <nav class="navbar navbar-fixed-top invenio-brand">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand text-hide" href="#">Invenio</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+                    {% if is_granted('ROLE_USER') %}
+                        <li><a href="{{ path('security_logout') }}">{{ app.user.ivoUserId }} logout</a></li>
+                    {% else %}
+                        <li><a href="{{ path('security_login') }}">Login</a></li>
+                    {% endif %}
+            <li><a href="#">Help</a></li>
+          </ul>
+{#           <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+ #}        </div>
+      </div>
+    </nav>
+
+{# <header class="header" id="Titlebox">
     {#<header id="Titlebox">#}
 
-        <ul class="navi">
+{#         <ul class="navi">
             <li class="navi_Left"><h2>{% block waterCoName %}{% endblock %}</h2></li>
             {# <li class="navi_Left"> Water Company ID {{WaterCoID}}</li> #}
-            <li class="navi_Center"><img class="logo-icon" src="{{ asset('images/Invenio-logo-wht.png') }}"></li>
+{#             <li class="navi_Center"><img class="logo-icon" src="{{ asset('images/Invenio-logo-wht.png') }}"></li>
             <li class="navi_Right">
                 <ul class="navi">
 
@@ -34,7 +61,7 @@
                     {% endif %}
                 </ul>
             </li>
-        </ul>
+        </ul> #}
 
         {#<ul class="navi">#}
             {#<li class="navi_Center">aaaa</li>#}
@@ -49,8 +76,8 @@
                 {#</div>#}
             {#</li>#}
         {#</ul>#}
-    </header>
-
+ {#    </header>
+  #}
 
 
 
@@ -67,15 +94,26 @@
         {#{% endif %}#}
     {#</ul>#}
 {#</header>#}
+    <div class="container-fluid">
+        <div class="col-sm-3 col-md-2 sidebar invenio-brand">  {# purely for layout nothing in the sidebar here#}
+            <div class="row">
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-<div class="main-content">
-    {% for msg in app.session.flashBag.get('success') %}
-        <div class="alert alert-success">
-            {{ msg }}
+{# <div class="main-content">
+ #}                 {% for msg in app.session.flashBag.get('success') %}
+                        <div class="alert alert-success">{{ msg }}</div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-    {% endfor %}
+    </div>
 
-    {% block body %}{% endblock %}
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+{% block body %}{% endblock %}
+</div>
+</div>
 </div>
 
 <div class="footer">
