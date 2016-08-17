@@ -1,0 +1,41 @@
+{% extends 'projects/projects.html.twig' %}
+
+{#} {% block stylesheets %}
+	{{parent()}}
+	<link href="{{ asset('css/simple-sidebar.css')}}" rel="stylesheet">
+	 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{#   <link href="{{ asset('css/sb-admin.css')}}" rel="stylesheet">  <!-- Custom CSS --> #}
+{#{% endblock %} #}
+
+
+{# "Projects #}
+{% block mainbody %}
+			<!-- Page Content -->
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">{# 							<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+ #}
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#batch1">Batch 1</a></li>
+				<li><a data-toggle="tab" href="#batch2">Batch 2</a></li>
+				<li><a data-toggle="tab" href="#batch3">Batch 3</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div id="batch1" class="tab-pane fade in active">
+					<h3>Batch 1</h3>
+					<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				</div>
+				<div id="batch2" class="tab-pane fade">
+					<h3>Menu 2</h3>
+					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+				</div>
+				<div id="batch3" class="tab-pane fade">
+					<h3>Menu 3</h3>
+					<p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+ </div>
+{% endblock %}
