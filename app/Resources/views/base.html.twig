@@ -30,100 +30,41 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-                    {% if is_granted('ROLE_USER') %}
-                        <li><a href="{{ path('security_logout') }}">{{ app.user.ivoUserId }} logout</a></li>
-                    {% else %}
-                        <li><a href="{{ path('security_login') }}">Login</a></li>
-                    {% endif %}
+            {% if is_granted('ROLE_USER') %}
+                <li><a href="{{ path('security_logout') }}">{{ app.user.ivoUserId }} logout</a></li>
+            {% else %}
+                <li><a href="{{ path('security_login') }}">Login</a></li>
+            {% endif %}
             <li><a href="#">Help</a></li>
           </ul>
 {#           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
           </form>
- #}        </div>
+ #}     </div>
       </div>
     </nav>
 
-{# <header class="header" id="Titlebox">
-    {#<header id="Titlebox">#}
-
-{#         <ul class="navi">
-            <li class="navi_Left"><h2>{% block waterCoName %}{% endblock %}</h2></li>
-            {# <li class="navi_Left"> Water Company ID {{WaterCoID}}</li> #}
-{#             <li class="navi_Center"><img class="logo-icon" src="{{ asset('images/Invenio-logo-wht.png') }}"></li>
-            <li class="navi_Right">
-                <ul class="navi">
-
-                    {% if is_granted('ROLE_USER') %}
-                        <li><a href="{{ path('security_logout') }}">{{ app.user.ivoUserId }} logout</a></li>
-                    {% else %}
-                        <li><a href="{{ path('security_login') }}">Login</a></li>
-                    {% endif %}
-                </ul>
-            </li>
-        </ul> #}
-
-        {#<ul class="navi">#}
-            {#<li class="navi_Center">aaaa</li>#}
-            {#<li class="navi_Right">#}
-                {#<div class="input-group custom-search-form">#}
-                    {#<input type="text" class="form-control" placeholder="Search...">#}
-                    {#<span class="input-group-btn">#}
-							{#<button class="btn btn-default" type="button">#}
-								{#<i class="fa fa-search"></i>#}
-							{#</button>#}
-						{#</span>#}
-                {#</div>#}
-            {#</li>#}
-        {#</ul>#}
- {#    </header>
-  #}
-
-
-
-
-
-    {#<img class="logo-icon" src="{{ asset('images/Invenio-logo-wht.png') }}">#}
-    {#<h1 class="logo">AquaNote</h1>#}
-    {#<ul class="navi">#}
-        {#<li class="search"><a href="#" class="js-header-search-toggle"><i class="fa fa-search"></i></a></li>#}
-        {#{% if is_granted('ROLE_USER') %}#}
-            {#<li><a href="{{ path('security_logout') }}">Logout</a></li>#}
-        {#{% else %}#}
-            {#<li><a href="{{ path('security_login') }}">Login</a></li>#}
-        {#{% endif %}#}
-    {#</ul>#}
-{#</header>#}
     <div class="container-fluid">
-        <div class="col-sm-3 col-md-2 sidebar invenio-brand">  {# purely for layout nothing in the sidebar here#}
-            <div class="row">
-                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
-{# <div class="main-content">
- #}                 {% for msg in app.session.flashBag.get('success') %}
-                        <div class="alert alert-success">{{ msg }}</div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
+{#     <div class="col-sm-3 col-md-2 sidebar invenio-brand">  {# purely for layout nothing in the sidebar here#}
+    <div class="row">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        {% for msg in app.session.flashBag.get('success') %}
+            <div class="alert alert-success">{{ msg }}</div>
+        {% endfor %}
     </div>
+    </div>
+    </div>
+   
 
-<div class="container-fluid">
-<div class="row">
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-{% block body %}{% endblock %}
-</div>
-</div>
-</div>
-
-<div class="footer">
-    {#<p class="footer-text">Made with <span class="heart"><3</span> <a href="https://knpuniversity.com">KnpUniversity</a></p>#}
-</div>
+{% block body %}{% endblock body %}
+   
+{# <div class="footer">
+    <p class="footer-text">Made with <span class="heart"><3</span> <a href="https://knpuniversity.com">KnpUniversity</a></p>
+</div> #}
 
 {% block javascripts %}
-    <script   src="{{ asset('https://code.jquery.com/jquery-3.1.0.min.js')}}"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+    <script src="{{ asset('https://code.jquery.com/jquery-3.1.0.min.js')}}"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
     <script src="{{ asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')}}" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    {#<script src="{{ asset('js/main.js') }}"></script>#}
 {% endblock %}
 </body>
 </html>

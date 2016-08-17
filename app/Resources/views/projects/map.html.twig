@@ -1,42 +1,45 @@
-{% block body %}	
-	<a>{{WaterCoName}}</a>
-	<div id="Map">
-		<div id="googleMap" style="width:100%;height:700px;"></div>
-	</div> 
-{% endblock %}
+{% extends 'projects/projects.html.twig' %}
+
+{% block mainbody %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">{# 							<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+ #}
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#batch1">Batch 1</a></li>
+				<li><a data-toggle="tab" href="#batch2">Batch 2</a></li>
+				<li><a data-toggle="tab" href="#batch3">Batch 3</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div id="batch1" class="tab-pane fade in active">
+					<div id="Map1">
+						<div id="googleMap1" style="width:100%;height:700px;"></div>
+					</div> 
+				</div>
+				<div id="batch2" class="tab-pane fade">
+					<div id="Map2">
+						<div id="googleMap2" style="width:100%;height:700px;"></div>
+					</div> 
+				</div>
+				<div id="batch3" class="tab-pane fade">
+					<div id="Map3">
+						<div id="googleMap3" style="width:100%;height:700px;"></div>
+					</div> 
+				</div>
+			</div>
+		</div>
+	</div>
+ </div>
+{% endblock mainbody %}
 
 {% block javascripts %}
+	{{ parent() }}
 	<script src="{{ asset('http://maps.googleapis.com/maps/api/js?key=AIzaSyC2MS_RTHEHSM590q-CVPWKMeaVJf-kuSc')}}"></script>
-	<script src="{{ asset('https://code.jquery.com/jquery-3.1.0.js')}}"></script>
- 	<script>
-		$("#menu-toggle").click(function(e) {
-			e.preventDefault();
-			$("#wrapper").toggleClass("toggled");
-		});
-	</script>
 
 	<script>
-		var myCenter=new google.maps.LatLng(53.108863, -1.555455);
 
-		function initialize()
-			{
-			var mapProp = {
-				center:myCenter,
-				zoom:14,
-				mapTypeId:google.maps.MapTypeId.ROADMAP
-			};
-
-			var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-
-			var marker=new google.maps.Marker({
-				position:myCenter,
-			});
-
-			marker.setMap(map);
-			
-    	setMarkers(map);
-    }
-    	
+   	
 		function setMarkers(map) {
         // Adds markers to the map.
 
@@ -61,15 +64,83 @@
           coords: [1, 1, 1, 20, 18, 20, 18, 1],
           type: 'poly'
         };
-
-        {% for Logger in Loggers %}
+	{% if LoggerLocations %}
+        {% for LoggerLocation in LoggerLocations %}
           var marker = new google.maps.Marker({
-          	position: {lat: {{Logger.ivoGpsLatitude }}, lng: {{Logger.ivoGpsLongitude}}}
+          	position: {lat: {{LoggerLocation.ivoGpsLatitude }}, lng: {{LoggerLocation.ivoGpsLongitude}}}
           });
           marker.setMap(map);
-				{% endfor %}
+		{% endfor %}
+	{% endif %}
       }
 
-		google.maps.event.addDomListener(window, 'load', initialize);
+		var map;
+
+jQuery(function($) {
+    $(document).ready(function() {
+    			var myCenter1=new google.maps.LatLng(53.108863, -1.555455);
+				var myCenter2=new google.maps.LatLng(48.108863, -1.555455);
+				var myCenter3=new google.maps.LatLng(53.108863, -2.555455);
+		 
+        	var mapProp1 = {
+				center:myCenter1,
+				zoom:14,
+				mapTypeId:google.maps.MapTypeId.ROADMAP
+			};
+
+			var mapProp2 = {
+				center:myCenter2,
+				zoom:14,
+				mapTypeId:google.maps.MapTypeId.ROADMAP
+			};
+			var mapProp3 = {
+				center:myCenter3,
+				zoom:14,
+				mapTypeId:google.maps.MapTypeId.ROADMAP
+			};
+
+			var map1=new google.maps.Map(document.getElementById("googleMap1"),mapProp1);
+			var map2=new google.maps.Map(document.getElementById("googleMap2"),mapProp2);
+			var map3=new google.maps.Map(document.getElementById("googleMap3"),mapProp3);
+			
+    	
+        // console.dir(map1);
+        // google.maps.event.trigger(map1, 'resize');
+        // console.dir(map2);
+        // google.maps.event.trigger(map2, 'resize');
+        // console.dir(map3);
+        // google.maps.event.trigger(map3, 'resize');
+
+        $('a[href="#batch1"]').on('shown', function(e) {
+            google.maps.event.trigger(map1, 'resize');
+            var marker1=new google.maps.Marker({
+				position:myCenter1,
+			});
+			marker1.setMap(map1);
+			setMarkers(map1);
+        });
+        $("#googleMap1").css("width", 400).css("height", 400);
+
+        $('a[href="#batch2"]').on('shown', function(e) {
+            google.maps.event.trigger(map2, 'resize');
+            var marker2=new google.maps.Marker({
+				position:myCenter2,
+			});
+			marker2.setMap(map2);
+			setMarkers(map2);
+        });
+        $("#googleMap2").css("width", 500).css("height", 500);
+
+        $('a[href="#batch3"]').on('shown', function(e) {
+            google.maps.event.trigger(map3, 'resize');
+            var marker3=new google.maps.Marker({
+				position:myCenter3,
+			});
+			marker3.setMap(map3);
+			setMarkers(map3);
+        });
+        $("#googleMap3").css("width", 400).css("height", 400);
+    });
+});
 	</script>
 {% endblock %}
